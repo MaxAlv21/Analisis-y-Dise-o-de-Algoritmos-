@@ -1,0 +1,76 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+void generar_arreglo(int* arr, int size);
+void imprimir_arreglo(int* arr, int size);
+int busqueda_secuencial(int* arr, int size, int valor);
+void ordenar_arreglo(int* arr, int size);
+
+int main() {
+    srand(time(NULL)); // Inicializa el generador de números aleatorios con el tiempo actual
+    int size = 5;//Aqui es donde se cambia la cantidad de numeros aleatorios
+    int* arr = malloc(sizeof(int) * size); // Reservar memoria para el arreglo
+    
+    generar_arreglo(arr, size);
+    printf("Arreglo generado aleatoriamente:\n");
+    imprimir_arreglo(arr, size);
+    
+    int valor_buscado = arr[2]; // Buscar el tercer elemento del arreglo // Empieza desde 0 
+    int indice_encontrado = busqueda_secuencial(arr, size, valor_buscado);
+    if (indice_encontrado == -1) {
+        printf("%d no se encontró en el arreglo.\n", valor_buscado);
+    } else {
+        printf("%d se encontró en el índice %d del arreglo.\n", valor_buscado, indice_encontrado);
+    }
+    
+    ordenar_arreglo(arr, size);
+    printf("Arreglo ordenado:\n");
+    imprimir_arreglo(arr, size);
+    
+    valor_buscado = arr[2]; // Buscar el tercer elemento del arreglo ordenado
+    indice_encontrado = busqueda_secuencial(arr, size, valor_buscado);
+    if (indice_encontrado == -1) {
+        printf("%d no se encontró en el arreglo ordenado.\n", valor_buscado);
+    } else {
+        printf("%d se encontró en el índice %d del arreglo ordenado.\n", valor_buscado, indice_encontrado);
+    }
+    
+    free(arr); // Liberar la memoria reservada para el arreglo
+    
+    return 0;
+}
+
+void generar_arreglo(int* arr, int size) {
+    for (int i = 0; i < size; i++) {
+        arr[i] = rand() % 100; // Generar un número aleatorio entre 0 y 99
+    }
+}
+
+void imprimir_arreglo(int* arr, int size) {
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+int busqueda_secuencial(int* arr, int size, int valor) {
+    for (int i = 0; i < size; i++) {
+        if (arr[i] == valor) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+void ordenar_arreglo(int* arr, int size) {
+    for (int i = 0; i < size - 1; i++) {
+        for (int j = i + 1; j < size; j++) {
+            if (arr[i] > arr[j]) {
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+    }
+}
