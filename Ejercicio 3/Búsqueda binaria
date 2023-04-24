@@ -1,1 +1,37 @@
+#include <stdio.h>
 
+int busqueda_binaria(int arr[], int size, int elemento);
+
+int main() {
+    int arr[] = {1, 3, 5, 7, 9, 11, 13};
+    int size = sizeof(arr) / sizeof(arr[0]);
+    int elemento = 7;
+    int indice = busqueda_binaria(arr, size, elemento);
+    
+    if (indice == -1) {
+        printf("El elemento no se encontró en el arreglo.\n");
+    } else {
+        printf("El elemento se encuentra en el índice %d del arreglo.\n", indice);
+    }
+    
+    return 0;
+}
+
+int busqueda_binaria(int arr[], int size, int elemento) {
+    int izq = 0;
+    int der = size - 1;
+    
+    while (izq <= der) {
+        int medio = (izq + der) / 2;
+        
+        if (arr[medio] == elemento) {
+            return medio;
+        } else if (arr[medio] < elemento) {
+            izq = medio + 1;
+        } else {
+            der = medio - 1;
+        }
+    }
+    
+    return -1;
+}
