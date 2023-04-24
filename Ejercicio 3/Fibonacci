@@ -1,0 +1,25 @@
+#include <stdio.h>
+
+int fibonacci(int n) {
+    if (n == 0) {
+        return 0;
+    }
+    else if (n == 1) {
+        return 1;
+    }
+    else {
+        return fibonacci(n-1) + fibonacci(n-2);
+    }
+}
+
+int main() {
+    int n, i;
+    printf("Ingresa el numero de terminos de la secuencia de Fibonacci que deseas generar: ");
+    scanf("%d", &n);
+    printf("La secuencia de Fibonacci es:\n");
+    for (i = 0; i < n; i++) {
+        printf("%d ", fibonacci(i));
+    }
+    printf("\n");
+    return 0;
+}
