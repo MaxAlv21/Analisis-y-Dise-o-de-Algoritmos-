@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+void stoogesort(int arr[], int l, int h) {
+    if (l >= h) return;
+    if (arr[l] > arr[h]) {
+        int temp = arr[l];
+        arr[l] = arr[h];
+        arr[h] = temp;
+    }
+    if (h - l + 1 > 2) {
+        int t = (h - l + 1) / 3;
+        stoogesort(arr, l, h-t);
+        stoogesort(arr, l+t, h);
+        stoogesort(arr, l, h-t);
+    }
+}
+
+int main() {
+    int arr[] = { 8, 7, 5, 9, 6};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    stoogesort(arr, 0, n-1);
+    printf("Arreglo ordenado: ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    return 0;
+}
